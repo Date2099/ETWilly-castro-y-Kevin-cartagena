@@ -1,0 +1,102 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head%}
+<link rel="stylesheet" href="{% static 'estilo.css' %}">
+<link rel="stylesheet" href="{% static 'estilocrud.css' %}">
+
+{% endblock %}
+
+{% block content%}
+
+
+
+  <!-- productos -->
+  <div class="container text-left">
+    <div class="row">
+      <div class="col-sm-12 col-md-3 titulo3">
+        <h3>Categorias</h3>
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active listado" href="#">Alimentos para perro</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link listado" href="#">Alimentos para gato</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link listado" href="#">Juguetes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link listado" href="#">Ropa</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link listado" href="#">Accesesorios</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link listado" href="#">Snacks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link listado" href="#">Medicinas</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link listado" href="#">Transporte</a>
+          </li>
+        </ul>
+
+      </div>
+      <div class="col-sm-12 col-md-9 prodc">
+        {% for product in products %}
+        <div class="card cardProduct" style="width: 18rem;">
+          <img width="300" height="300" src="{{ product.image }}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <p class="card-text">{{product.name}}</p>
+
+            <p>
+              {{product.description}}
+            </p>
+
+            <p {% if product.if_offer%} class="texto-tachado" {% endif %}>
+
+              Precio ${{product.price}}
+            </p>
+
+            {% if product.if_offer%}
+            <p>
+
+              Precio oferta ${{product.get_discount_price}}
+
+            </p>
+            {% endif%}
+
+            <p>
+              {% if product.stock > 0 %}
+              Stock {{ product.stock }}
+              {%else%}
+              Stock agotado
+              {% endif%}
+            </p>
+            {% if product.stock > 0 %}
+              <a
+                class="btn btn-primary btn-custom"
+                href="{% url 'addtocar' product.id %}"
+              >
+              Añadir al carrito
+             </a>
+             {%else%}
+             <button
+             class="btn disabled"
+             disable
+             >
+             Añadir al carrito
+            </button>
+            {% endif%}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+  {% endblock %}
+

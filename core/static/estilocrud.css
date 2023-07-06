@@ -1,0 +1,84 @@
+body{
+    background-image: url(imagenes/seamless-background-with-pink-cat-tracks-endless-pattern-on-white-background-for-your-design-vector.jpg);
+
+}
+
+
+#estilodCr{
+    padding: 8px;
+    margin-bottom: 24px;   
+}
+
+#titulo5{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+}
+
+
+.prueba2{
+    display: flex;
+    flex-grow: inherit;
+    background-color: #facd81;
+    font-weight: bold !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+
+.bs-nav-pills-link-active-bg {
+    background-color: #fff !important;
+  }
+
+.grid-container {
+    height: 100vh;
+    
+
+}
+
+
+  
+@media (max-width: 768px) {
+    .grid-container {
+      height: 0;
+      
+    }
+}
+  
+
+.col-12 {
+    height: 100%;
+    float: left !important;
+}
+
+.prueba4{
+    display: flex !important; 
+
+    flex-direction: column;
+    align-items: center;
+    
+}
+  
+
+.el-contenedor{
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+
+.estilonav{
+    background-color: #facd81;
+    font-weight: bold !important;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.text-decoration-none {
+    text-decoration: none !important;
+    color: inherit;
+    font-size: 50px;
+}

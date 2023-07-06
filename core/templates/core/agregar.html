@@ -1,0 +1,242 @@
+{% extends 'core/base2.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'estilocrud.css' %}">
+    <link rel="stylesheet" href="{% static 'estiloUsuario.css' %}">
+    <link rel="stylesheet" href="{% static 'estiloform.css' %}">
+    <link rel="stylesheet" href="{% static 'estiloCrproductos.css' %}">
+
+
+{% endblock %}
+
+{% block content %}
+    <style>
+
+        .table-responsive {
+            margin: 30px 0;
+        }
+
+        .table-wrapper {
+            background: #fff;
+            padding: 20px 25px;
+            border-radius: 3px;
+            min-width: 1000px;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+        }
+
+        .table-title {
+            padding-bottom: 15px;
+            background: #ffc662;
+            color: #fff;
+            padding: 16px 30px;
+            min-width: 100%;
+            margin: -20px -25px 10px;
+            border-radius: 3px 3px 0 0;
+        }
+
+        .table-title h2 {
+            margin: 5px 0 0;
+            font-size: 24px;
+        }
+
+        .table-title .btn-group {
+            float: right;
+        }
+
+        .table-title .btn {
+            color: #fff;
+            float: right;
+            font-size: 13px;
+            border: none;
+            min-width: 50px;
+            border-radius: 2px;
+            border: none;
+            outline: none !important;
+            margin-left: 10px;
+        }
+
+        .table-title .btn i {
+            float: left;
+            font-size: 21px;
+            margin-right: 5px;
+        }
+
+        .table-title .btn span {
+            float: left;
+            margin-top: 2px;
+        }
+
+        table.table tr th, table.table tr td {
+            border-color: #e9e9e9;
+            padding: 12px 15px;
+            vertical-align: middle;
+        }
+
+
+        table.table tr th:last-child {
+            width: 100px;
+        }
+
+        table.table-striped tbody tr:nth-of-type(odd) {
+            background-color: #fcfcfc;
+        }
+
+        table.table-striped.table-hover tbody tr:hover {
+            background: #f5f5f5;
+        }
+
+        table.table th i {
+            font-size: 13px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        table.table td:last-child i {
+            opacity: 0.9;
+            font-size: 22px;
+            margin: 0 5px;
+        }
+
+        table.table td a {
+            font-weight: bold;
+            color: #566787;
+            display: inline-block;
+            text-decoration: none;
+            outline: none !important;
+        }
+
+        table.table td a:hover {
+            color: #2196F3;
+        }
+
+        table.table td a.edit {
+            color: #FFC107;
+        }
+
+        table.table td a.delete {
+            color: #F44336;
+        }
+
+        table.table td i {
+            font-size: 19px;
+        }
+
+
+        /* Modal styles */
+
+        .modal .modal-header, .modal .modal-body, .modal .modal-footer {
+            padding: 20px 30px;
+        }
+
+        .modal .modal-content {
+            border-radius: 3px;
+            font-size: 14px;
+        }
+
+        .modal .modal-footer {
+            background: #ecf0f1;
+            border-radius: 0 0 3px 3px;
+        }
+
+        .modal .modal-title {
+            display: inline-block;
+        }
+
+        .modal .form-control {
+            border-radius: 2px;
+            box-shadow: none;
+            border-color: #dddddd;
+        }
+
+        .modal textarea.form-control {
+            resize: vertical;
+        }
+
+        .modal .btn {
+            border-radius: 2px;
+            min-width: 100px;
+        }
+
+        .modal form label {
+            font-weight: normal;
+        }
+
+        .miDiv {
+
+            margin-top: 16px;
+            background-color: #f2f2f2;
+            box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.4);
+            border-radius: 16px;
+            padding: 10px;
+        }
+    </style>
+
+    </head>
+
+    <div class="col-sm-12 col-md-9 prueba4">
+        <div class="container-xl miDiv">
+            <form onsubmit="return validar()" style="padding: 16px" id="agregar" action="{% url 'agregar' %}"
+                  method="post">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="producto" class="form-label">Producto: </label>
+                    <input type="text" class=" form-control " id="producto" name="name"
+                           onkeyup="validarProducto('#producto','#p-producto')">
+                    <p id="p-producto" class="errorP colorP">El nombre del producto debe tener al menos 3 caracteres y
+                        maximo 20</p>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Precio: </label>
+                    <input type="number" class="form-control" id="precio" name="price"
+                           onkeyup="validarPrecio('#precio','#p-precio')">
+                    <p id="p-precio" class="errorP colorP">El precio debe superar los 5000 pesos y estar por debajo de
+                        los 50000
+                        pesos</p>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Stock: </label>
+                    <input type="number" class="form-control" id="precio" name="stock"
+                           onkeyup="validarPrecio('#precio','#p-precio')">
+                    <p id="p-precio" class="errorP colorP">El precio debe superar los 5000 pesos y estar por debajo de
+                        los 50000
+                        pesos</p>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Descripcion: </label>
+                    <input type="text" class="form-control" id="precio" name="description"
+                           onkeyup="validarPrecio('#precio','#p-precio')">
+                    <p id="p-precio" class="errorP colorP">El precio debe superar los 5000 pesos y estar por debajo de
+                        los 50000
+                        pesos</p>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="flexCheckIndeterminate"
+                           name="if_offer">
+                    <label class="form-check-label" for="flexCheckIndeterminate">
+                        En oferta
+                    </label>
+                </div>
+                <div class="mb-3">
+                    <label for="precio" class="form-label">Porcentaje de descuento: </label>
+                    <input type="number" class="form-control" id="precio" name="discount_percent"
+                           onkeyup="validarPrecio('#precio','#p-precio')">
+                    <p id="p-precio" class="errorP colorP">El precio debe superar los 5000 pesos y estar por debajo de
+                        los 50000
+                        pesos</p>
+                </div>
+                <div class="mb-3">
+                    <label for="imagen" class="form-label">imagen: </label>
+                    <input type="file" class="form-control" id="imagen" name="image"
+                           onchange="validarImagen('#imagen', '#p-imagen')">
+                    <p id="p-imagen" class="errorP colorP">Se debe agregar una imagen del producto</p>
+                </div>
+                <button class="btn btn-success btn-lg float-right" type="submit">Agregar</button>
+                <h3 id="msj"></h3>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,75 @@
+{% extends 'core/base3.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'estilocrud.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="col-sm-12 col-md-9 prueba4">
+        <div class="container mt-5" style="margin-bottom: 80px !important;">
+            <div class="row">
+                <div class="col-12">
+                    <h3>Mis Compras</h3>
+                    <hr>
+                </div>
+            </div>
+            {% for venta in ventas %}
+                <div class="row">
+                    <div class="col-12 col-md-12 mb-4">
+                        <div class="bg-light p-3 shadow-sm">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h4 class="mb-0">{{ venta.following_set.first.date }}</h4>
+                                <span class="badge bg-success">{{ venta.following_set.first.status }}</span>
+                            </div>
+                            <hr>
+                            {% for detalle in venta.detail_set.all %}
+                                <div class="row">
+                                    <div class="col-4">
+                                        <img src="{{ detalle.product.image }}" class="img-fluid">
+                                    </div>
+                                    <div class="col-8">
+                                        <h5>{{ detalle.product.name }}</h5>
+                                        <p>{{ detalle.product.description }}</p>
+                                        <span>Precio: ${{ detalle.price }}</span>
+                                        <p>cantidad {{ detalle.amount }}</p>
+
+                                    </div>
+                                </div>
+                                <hr>
+                            {% endfor %}
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between">
+                                        <h4 class="mb-0"></h4>
+                                        <h5>Codigo venta {{ venta.following_set.first.id }}</h5>
+                                        <h5>Total: $ {{ venta.total }}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    </div>
+    </div>
+
+{% endblock %}
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

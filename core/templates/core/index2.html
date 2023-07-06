@@ -1,0 +1,101 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'estilocrud.css' %}">
+{% endblock %}
+
+{% block content %}
+
+
+    <body>
+    <!-- titulo -->
+    <div id="prueba">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6">
+                <div class="title">
+                    <div>
+                        <h1>Bienvenido a la pagina MaxShop</h1>
+                        <h5>Tenemos los productos que tu mascota necesita</h5>
+                        <a href="{% url 'productos' %}" class="btn btn-primary btn-lg btn-custom" tabindex="-1"
+                           role="button"
+                           aria-disabled="true">Productos</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6">
+                <div id="imagen2">
+                    <img class="imagen2"
+                         src="{% static 'imagenes/patas-gato-multicolor-diseno-plano-fondo-pantalla-patas-gato-lindo-ilustracion-vectorial_623474-163.avif' %}"
+                         alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="separador">
+        <h2>Productos en oferta</h2>
+    </div>
+
+    <div class="col-sm-12 prodc">
+        {% for product in products %}
+            <div class="card cardProduct" style="width: 18rem;">
+                <img width="300" height="300" src="{{ product.image }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <p class="card-text">{{ product.name }}</p>
+
+                    <p>
+                        {{ product.description }}
+                    </p>
+
+                    <p {% if product.if_offer %} class="texto-tachado" {% endif %}>
+
+                        Precio ${{ product.price }}
+                    </p>
+
+                    {% if product.if_offer %}
+                        <p>
+
+                            Precio oferta ${{ product.get_discount_price }}
+
+                        </p>
+                    {% endif %}
+
+                    <p>
+                        {% if product.stock > 0 %}
+                            Stock {{ product.stock }}
+                        {% else %}
+                            Stock agotado
+                        {% endif %}
+                    </p>
+                    {% if product.stock > 0 %}
+                        <a
+                                class="btn btn-primary btn-custom"
+                                href="{% url 'addtocar' product.id %}"
+                        >
+                            Añadir al carrito
+                        </a>
+                    {% else %}
+                        <button
+                                class="btn disabled"
+                                disable
+                        >
+                            Añadir al carrito
+                        </button>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"
+        integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js"
+        integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ"
+        crossorigin="anonymous"></script>
+

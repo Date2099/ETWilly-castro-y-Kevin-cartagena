@@ -1,0 +1,103 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  {% block head %}
+  {% endblock%}
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+
+
+</head>
+
+
+<header>
+
+
+  <div id="arriba" class="test">
+
+    <div class="test">
+      <div>
+        <img style="width: 100px;" src="{% static 'imagenes/Thepug.png' %}" alt="">
+      </div>
+      <div>
+        <a class="text-decoration-none" href="{% url 'home'%}">MaxShop</a>
+      </div>
+      <div>
+        <img style="width: 100px;" src="{% static 'imagenes/Thepug.png' %}" alt="">
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<body>
+
+
+
+  <div class="container el-contenedor grid-container ">
+    <div class="row h-100">
+      <div class="col-xs-12 col-sm-3 ">
+        <nav class="navbar navbar-expand-lg estilonav">
+          <div class="container-fluid ">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav flex-column">
+                <li class="nav-item">
+                  <a class="nav-link active bs-nav-pills-link-active-bg" aria-current="page" href="#"><i class="bi bi-house"></i> Inicio</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark text-light" href="{%url 'suscripcion'%}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-envelope-heart" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm2-1a1 1 0 0 0-1 1v.217l3.235 1.94a2.76 2.76 0 0 0-.233 1.027L1 5.384v5.721l3.453-2.124c.146.277.329.556.55.835l-3.97 2.443A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741l-3.968-2.442c.22-.28.403-.56.55-.836L15 11.105V5.383l-3.002 1.801a2.76 2.76 0 0 0-.233-1.026L15 4.217V4a1 1 0 0 0-1-1H2Zm6 2.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z" />
+                    </svg>
+                    <i class="bi bi-envelope-heart"></i> Suscripcion
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="{% url 'historial'%}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                      class="bi bi-bag-heart" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd"
+                        d="M10.5 3.5a2.5 2.5 0 0 0-5 0V4h5v-.5Zm1 0V4H15v10a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V4h3.5v-.5a3.5 3.5 0 1 1 7 0ZM14 14V5H2v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1ZM8 7.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132Z" />
+                    </svg>
+                    <i class="bi bi-bag-heart"></i> Historial de compras
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link text-dark" href="{% url 'seguimiento'%}">
+                    <i class="bi bi-truck"></i> seguimiento
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'logout'%}"><i class="bi bi-box-arrow-right"></i> Cerrar sesión</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+      {% block content%}
+      {% endblock%}
+
+      
+  <footer>
+    <div class="pie fixed-bottom">
+      <h5>Derechos reservados. ©2023</h5>
+    </div>
+  </footer>
